@@ -1,7 +1,5 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 import requests
 import re
 
@@ -10,17 +8,15 @@ app = FastAPI()
 # Enable CORS for GitHub Pages frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Optional: set to your GitHub Pages domain for better security
+    allow_origins=["*"],  # For better security: replace "*" with "https://yourusername.github.io"
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Optional: Serve static frontend if deploying together
-
 @app.get("/")
-async def serve_index():
-    return FileResponse("static/index.html")
+async def root():
+    return {"message": "Repo Analyzer backend is working ✅"}
 
 @app.get("/github/{owner}/{repo}")
 async def get_repository_info(owner: str, repo: str, token: str = Query(None)):
@@ -33,7 +29,6 @@ async def get_repository_info(owner: str, repo: str, token: str = Query(None)):
         languages_response = requests.get(f"{base_url}/languages", headers=headers)
         commits_response = requests.get(f"{base_url}/commits?per_page=50", headers=headers)
 
-        # Check status codes
         for key, response in {
             "repository": repo_response,
             "contributors": contributors_response,
@@ -56,7 +51,6 @@ async def get_repository_info(owner: str, repo: str, token: str = Query(None)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.get("/github/{owner}/{repo}/branch-commits")
 async def get_branch_commit_counts(owner: str, repo: str, token: str = Query(None)):
     headers = {"Authorization": f"token {token}"} if token else {}
@@ -78,7 +72,6 @@ async def get_branch_commit_counts(owner: str, repo: str, token: str = Query(Non
             if r.status_code != 200:
                 continue
 
-            # Parse pagination for commit count
             if "Link" in r.headers:
                 match = re.search(r"&page=(\d+)>; rel=\"last\"", r.headers["Link"])
                 count = int(match.group(1)) if match else 1
