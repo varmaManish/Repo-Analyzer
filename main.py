@@ -17,7 +17,6 @@ app.add_middleware(
 )
 
 # Optional: Serve static frontend if deploying together
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def serve_index():
