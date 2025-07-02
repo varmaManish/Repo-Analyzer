@@ -90,4 +90,4 @@ async def get_branch_commit_counts(owner: str, repo: str, token: str = Query(Non
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=10000)
