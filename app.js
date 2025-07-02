@@ -603,48 +603,49 @@
       });
     }
 
-    function createMermaidDiagram(commits, contributors) {
-      if (!commits.length) {
-        document.getElementById('mermaidContainer').innerHTML = 'No commit data available';
-        return;
-      }
+   function createMermaidDiagram(commits, contributors) {
+  const container = document.getElementById('mermaidContainer');
 
-      const recentCommits = commits.slice(0, 6);
-      const topContributor = contributors.length > 0 ? contributors[0].login : 'Unknown';
-      
-      let diagram = `graph TD
-        A[📁 Repository] --> B[🔄 Recent Commits]
-        A --> C[👥 Top Contributor: ${topContributor}]
-        B --> D[Latest Activity]
-      `;
-      
-      recentCommits.forEach((commit, i) => {
-        const sha = commit.sha.substring(0, 7);
-        const msg = commit.commit.message.substring(0, 40).replace(/["\n\r]/g, ' ').trim();
-        const author = commit.commit.author.name;
-        diagram += `\n        D --> E${i}["${sha}<br/>${msg}<br/>by ${author}"]`;
-      });
+  if (!commits.length) {
+    container.innerHTML = '<p style="color:white;">No commit data available</p>';
+    return;
+  }
 
-      // Add styling
-      diagram += `
-        classDef default fill:#1a1a2e,stroke:#00d4ff,stroke-width:2px,color:#fff
-        classDef highlight fill:#00d4ff,stroke:#fff,stroke-width:2px,color:#000
-        class A highlight
-      `;
+  const recentCommits = commits.slice(0, 6);
+  const topContributor = contributors.length > 0 ? contributors[0].login : 'Unknown';
 
-      document.getElementById('mermaidContainer').innerHTML = diagram;
-      mermaid.initialize({ 
-        startOnLoad: false,
-        theme: 'dark',
-        themeVariables: {
-          primaryColor: '#00d4ff',
-          primaryTextColor: '#fff',
-          primaryBorderColor: '#00d4ff',
-          lineColor: '#00d4ff'
-        }
-      });
-      mermaid.init(undefined, document.getElementById('mermaidContainer'));
-    }
+  // Generate the Mermaid graph string
+  let diagram = `graph TD
+    A[📁 Repository] --> B[🔄 Recent Commits]
+    A --> C[👥 Top Contributor: ${topContributor}]
+    B --> D[Latest Activity]`;
+
+  recentCommits.forEach((commit, i) => {
+    const sha = commit.sha.substring(0, 7);
+    const msg = commit.commit.message.split('\n')[0].substring(0, 40).replace(/["]/g, '');
+    const author = commit.commit.author.name;
+    diagram += `\n    D --> E${i}["${sha}<br/>${msg}<br/>by ${author}"]`;
+  });
+
+  diagram += `
+    classDef default fill:#1a1a2e,stroke:#00d4ff,stroke-width:2px,color:#fff
+    classDef highlight fill:#00d4ff,stroke:#fff,stroke-width:2px,color:#000
+    class A highlight
+  `;
+
+  // ✅ Clean old diagram (important!)
+  container.innerHTML = '';
+
+  // ✅ Create and add a new <div class="mermaid"> each time
+  const diagramDiv = document.createElement('div');
+  diagramDiv.className = 'mermaid';
+  diagramDiv.textContent = diagram;
+  container.appendChild(diagramDiv);
+
+  // ✅ Reinitialize Mermaid manually
+  mermaid.initialize({ startOnLoad: false });
+  mermaid.init(undefined, diagramDiv);
+}
 
     // Add keyboard shortcut
     document.addEventListener('keydown', (e) => {
