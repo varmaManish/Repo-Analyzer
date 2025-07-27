@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+motor
+pymongo
+requests
+passlib[bcrypt]
+python-jose[cryptography]
+httpx
+pymongo
