@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Required Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- libs -->
+<!-- entry -->
+ <script type="module" src="/static/js/main.js"></script>
+ <script type="module" src="/static/js/payment.js"></script>
+<script src="/static/js/session.js"></script>
+</head>
+<body>
+    <canvas id="canvas-bg"></canvas>
+    <div id="particles" class="particles"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚀 Multi Repository Analyzer</h1>
+            <p class="subtitle">Advanced repository analysis with interactive visualizations</p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-group">
+                <input type="text" id="repoUrl" placeholder="Enter GitHub repository URL (e.g., https://github.com/user/repo)" />
+                <input type="text" id="token" placeholder="GitHub Token (optional, for higher rate limits)" />
+                <button class="analyze-btn" onclick="analyzeRepository()">
+                    <span>🔍 Analyze Repository</span>
+                </button>
+            </div>
+            <div class="input-group bulk-analysis">
+                <input type="text" id="githubUser" placeholder="Enter GitHub username for bulk analysis" />
+                <button class="analyze-btn" onclick="loadUserRepositories()">Load Repositories</button>
+                <div id="repoList" class="repo-list"></div>
+                <button class="analyze-btn" onclick="analyzeSelectedRepositories()">Analyze Selected</button>
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+            <p>Analyzing repository...</p>
+        </div>
+
+        <!-- Error -->
+        <div id="error" class="error" style="display: none;"></div>
+
+        <!-- Repository Tabs -->
+        <div id="repoTabs" class="repo-tabs"></div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="dashboard-grid">
+            <!-- Repository Information -->
+            <div class="card info-card">
+                <div id="repoDetails"></div>
+                <div id="statsGrid" class="stat-grid"></div>
+            </div>
+
+            <!-- Language Statistics -->
+            <div class="card">
+                <h3>📊 Language Distribution</h3>
+                <div id="languageStats" class="language-breakdown"></div>
+            </div>
+
+            <!-- Repository Flow Diagram -->
+            <div class="card diagram-card">
+                <h3>🧭 Repository Flow Diagram</h3>
+                <div id="mermaidContainer"></div>
+            </div>
+
+            <!-- File Structure -->
+            <div class="card">
+                <h3>📂 Repository File Structure</h3>
+                <div id="fileTree"></div>
+            </div>
+
+            <!-- Commit Activity Chart -->
+            <div class="card">
+                <h3>📈 Commit Activity</h3>
+                <div class="chart-container">
+                    <canvas id="commitChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Contributors Chart -->
+            <div class="card">
+                <h3>👥 Top Contributors</h3>
+                <div class="chart-container">
+                    <canvas id="contributorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Branch Commits Chart -->
+            <div class="card">
+                <h3>🌿 Branch Activity</h3>
+                <div class="chart-container">
+                    <canvas id="branchCommitChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Contributor Impact Chart -->
+            <div class="card">
+                <h3>💫 Contributor Impact</h3>
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Security Score -->
+            <div class="card">
+                <div id="security-score-card">
+                    <h3>🔒 Security Score</h3>
+                    <p>Loading security analysis...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repository Comparison Section -->
+       <!-- Repository Comparison Section -->
+<div id="comparisonSection" class="comparison-section card" style="position: relative;">
+  <h3>📊 Repository Comparison</h3>
+  <div class="comparison-chart">
+    <canvas id="comparisonChart"></canvas>
+  </div>
+
+  <!-- Overlay Paywall -->
+  <div id="comparisonOverlay">
+    <div class="overlay-content">
+      <p>🔒 Unlock Repository Comparison</p>
+      <button id="unlockComparisonBtn">Pay ₹100 (Test)</button>
+    </div>
+  </div>
+</div>
+
+    </div>
+</body>
+</html>

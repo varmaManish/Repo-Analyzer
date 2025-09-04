@@ -1,0 +1,44 @@
+[
+  {
+    "id": "user_1",
+    "email": "tejal@gmail.com",
+    "full_name": "harsh maurya",
+    "hashed_password": "$2b$12$VQflDj0Da4hHws0ltTJG0eghheqkfYqUq0Po93nWesvvinrXrl.sm",
+    "auth_provider": "manual",
+    "is_active": true,
+    "created_at": "2025-09-03T17:07:30.385849",
+    "updated_at": "2025-09-03T17:07:30.385849"
+  },
+  {
+    "id": "user_google_2",
+    "email": "hm8030705@gmail.com",
+    "full_name": "Harsh Maurya",
+    "google_id": "114197177704124751212",
+    "auth_provider": "google",
+    "is_active": true,
+    "created_at": "2025-09-03T17:33:10.049943",
+    "updated_at": "2025-09-03T17:33:10.049943",
+    "profile_picture": "https://lh3.googleusercontent.com/a/ACg8ocIvYTqu8jssLFLdXcvAa1yCfac83cQ-ZnMTjR8e73pSJvMMo9KO=s96-c"
+  },
+  {
+    "id": "user_3",
+    "email": "mv@gmail.com",
+    "full_name": "manish varma",
+    "hashed_password": "$2b$12$I4Il5ff4ImW3PTHomNzJX.tu.Ii6s5Hk3WCDiXe4m2..qtyI3h6a2",
+    "auth_provider": "manual",
+    "is_active": true,
+    "created_at": "2025-09-03T17:51:18.427322",
+    "updated_at": "2025-09-03T17:51:18.427322"
+  },
+  {
+    "id": "user_google_4",
+    "email": "mauryaharsh960@gmail.com",
+    "full_name": "Harsh Maurya",
+    "google_id": "107157632083950981791",
+    "auth_provider": "google",
+    "is_active": true,
+    "created_at": "2025-09-03T18:08:17.852630",
+    "updated_at": "2025-09-03T18:08:17.852630",
+    "profile_picture": "https://lh3.googleusercontent.com/a/ACg8ocLYtXfLeu1nLhXNsd_eVAHI90MATyU0yTaiSrAbuLuKQPL-3g=s96-c"
+  }
+]

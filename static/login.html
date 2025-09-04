@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GitHub Repository Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/auth.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Animated background -->
+    <canvas id="canvas-bg"></canvas>
+    <div id="particles"></div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to your GitHub Repository Analyzer account</p>
+            </div>
+
+            <!-- Error display -->
+            <div id="error" class="error-message" style="display: none;"></div>
+
+            <!-- Success display -->
+            <div id="success" class="success-message" style="display: none;"></div>
+
+            <!-- Google Sign-In Button -->
+            <div class="google-auth-section">
+                <div id="g_id_onload"
+                    data-client_id="614110627327-f24lge6sas1073dfpf8m1hh8aj2detip.apps.googleusercontent.com"
+                    data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn"
+                    data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_blue"
+                    data-text="signin_with" data-size="large" data-logo_alignment="left">
+                </div>
+            </div>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <!-- Manual Login Form -->
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+
+                <button type="submit" class="auth-btn" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="loading-spinner" style="display: none;"></div>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="/register" class="auth-link">Sign up here</a></p>
+                <p><a href="/" class="auth-link">← Back to Analyzer</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/static/js/background.js"></script>
+    <script type="module" src="/static/js/auth.js"></script>
+    <script>
+        // Initialize background on load
+        window.addEventListener('load', () => {
+            import('/static/js/background.js').then(module => {
+                module.initBackground();
+            });
+        });
+
+        // Google Sign-In callback - FIXED VERSION
+        window.handleGoogleSignIn = function (response) {
+            console.log('Google Sign-In response received:', response);
+
+            if (response.credential) {
+                console.log('Google credential found, processing authentication...');
+
+                import('/static/js/auth.js').then(module => {
+                    module.handleGoogleLogin(response.credential);
+                }).catch(error => {
+                    console.error('Error importing auth module:', error);
+                    document.getElementById('error').textContent = 'Authentication module error';
+                    document.getElementById('error').style.display = 'block';
+                });
+            } else {
+                console.error('No credential in Google response');
+                document.getElementById('error').textContent = 'Google authentication failed - no credential received';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Handle Google Sign-In errors
+        window.addEventListener('load', () => {
+            // Add error handling for Google Sign-In
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: "614110627327-f24lge6sas1073dfpf8m1hh8aj2detip.apps.googleusercontent.com",
+                    callback: handleGoogleSignIn,
+                    error_callback: (error) => {
+                        console.error('Google Sign-In initialization error:', error);
+                        document.getElementById('error').textContent = 'Google Sign-In initialization failed';
+                        document.getElementById('error').style.display = 'block';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
