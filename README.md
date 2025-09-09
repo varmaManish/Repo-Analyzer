@@ -10,22 +10,6 @@ An advanced **web application** that analyzes GitHub repositories and provides *
 It is built with a **FastAPI backend** and a **static frontend (HTML, CSS, JavaScript)**.  
 The app integrates **Chart.js, Mermaid.js, and Three.js** for analytics, along with **Auth0 authentication** for secure access.  
 
----
-
-## 📑 Table of Contents
-
-- [🚀 Features](#-features)  
-- [🛠 Tech Stack](#-tech-stack)  
-- [⚡ Installation](#-installation)  
-- [▶️ Usage](#️-usage)  
-- [📷 Screenshots](#-screenshots)  
-- [🔮 Roadmap](#-roadmap)  
-- [🤝 Contributing](#-contributing)  
-- [📜 License](#-license)  
-- [👨‍💻 Author](#-author)  
-
----
-
 ## 🚀 Features
 
 - 🔍 **Fetch Public Repositories** – Enter a GitHub username to list all public repos.  
@@ -33,7 +17,6 @@ The app integrates **Chart.js, Mermaid.js, and Three.js** for analytics, along w
 - 👥 **Contributor Impact Scoring** – Rank contributors based on their activity.  
 - 🌲 **Branch Commit Counts** – Breakdown of commits per branch.  
 - 🛡 **Security Score (WIP)** – Assess repository security best practices.  
-- 🗑 **Dead File Detection (WIP)** – Identify unused or stale files.  
 - 📊 **Interactive Analytics** – Charts powered by Chart.js.  
 - 🧩 **3D Repo Visualizations** – Explore repository structure in 3D with Three.js.  
 - 📈 **Dynamic Flowcharts** – Auto-generated Mermaid diagrams.  
