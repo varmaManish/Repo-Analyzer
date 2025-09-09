@@ -22,7 +22,7 @@ The app integrates **Chart.js, Mermaid.js, and Three.js** for analytics, along w
 - 📈 **Dynamic Flowcharts** – Auto-generated Mermaid diagrams.  
 - 🔑 **Auth0 Authentication** – Secure login/logout support.  
 
----
+----
 
 ## 🛠 Tech Stack
 
@@ -34,10 +34,13 @@ The app integrates **Chart.js, Mermaid.js, and Three.js** for analytics, along w
 - FastAPI  
 - GitHub REST API v3  
 
-**Authentication**  
-- Auth0  
+**Authentication**
+- Auth0
+  
+**Payment Gateway**
+- Razorpay
 
----
+----
 
 ## ⚡ Installation
 
