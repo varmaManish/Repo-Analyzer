@@ -359,3 +359,8 @@ async function analyzeSelectedRepositories() {
     const repoUrls = selected.map(el => `https://github.com/${el.value}`);
     await analyzeRepositories(repoUrls);
 }
+import { initChatBot } from './authenticate.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    initChatBot();  // This will initialize the chatbot
+});
