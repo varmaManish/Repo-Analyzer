@@ -2,120 +2,338 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - GitHub Repository Analyzer</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="/static/auth.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GitHub Repository Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/auth.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 </head>
 
 <body>
-    <!-- Animated background -->
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <h1>Welcome Back</h1>
-                <p>Sign in to your GitHub Repository Analyzer account</p>
-            </div>
-
-            <!-- Error display -->
-            <div id="error" class="error-message" style="display: none;"></div>
-
-            <!-- Success display -->
-            <div id="success" class="success-message" style="display: none;"></div>
-
-            <!-- Google Sign-In Button -->
-            <div class="google-auth-section">
-                <div id="g_id_onload"
-                    data-client_id="614110627327-f24lge6sas1073dfpf8m1hh8aj2detip.apps.googleusercontent.com"
-                    data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn"
-                    data-auto_prompt="false">
-                </div>
-
-                <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_blue"
-                    data-text="signin_with" data-size="large" data-logo_alignment="left">
-                </div>
-            </div>
-
-            <div class="divider">
-                <span>or</span>
-            </div>
-
-            <!-- Manual Login Form -->
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="Enter your email">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
-                </div>
-
-                <button type="submit" class="auth-btn" id="loginBtn">
-                    <span class="btn-text">Sign In</span>
-                    <div class="loading-spinner" style="display: none;"></div>
-                </button>
-            </form>
-
-            <div class="auth-footer">
-                <p>Don't have an account? <a href="/register" class="auth-link">Sign up here</a></p>
-                <p><a href="/" class="auth-link">← Back to Analyzer</a></p>
-            </div>
-        </div>
+  <!-- Navbar -->
+  <div class="navbar">
+    GitHub Repository Analyzer
+    <div class="nav-links">
+      <a id="openLogin">Login</a>
+      <a href="/register">Sign Up</a>
     </div>
+  </div>
 
-    <!-- Scripts -->
-    <script type="module" src="/static/js/background.js"></script>
-    <script type="module" src="/static/js/auth.js"></script>
-    <script>
-        // Initialize background on load
-        window.addEventListener('load', () => {
-            import('/static/js/background.js').then(module => {
-                module.initBackground();
-            });
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">🚀 GitHub Repository Analyzer</h1>
+      <p class="hero-subtitle">Visualize, Analyze & Optimize Your Git Repositories</p>
+      <p class="hero-description">
+        Transform your GitHub repositories into actionable insights with deep analytics, 
+        beautiful visualizations, and comprehensive reporting. Search by username, 
+        analyze multiple repos, and discover patterns in your development workflow.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" id="getStartedBtn">
+          🔍 Start Analyzing
+        </button>
+        <button class="btn btn-secondary" id="learnMoreBtn">
+          📖 Learn More
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <div class="features-container">
+      <h2 class="section-title">Powerful Analysis Features</h2>
+      <p class="section-subtitle">
+        Everything you need to understand your repositories deeply
+      </p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3 class="feature-title">Multi-Repository Search</h3>
+          <p class="feature-description">
+            Search repositories by username and analyze multiple repos simultaneously. 
+            Get a comprehensive view of all your projects at once.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 class="feature-title">Visual Analytics Dashboard</h3>
+          <p class="feature-description">
+            Interactive charts, commit flow diagrams, and contributor statistics. 
+            Built with Chart.js and Mermaid.js for stunning visualizations.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3 class="feature-title">Contributor Insights</h3>
+          <p class="feature-description">
+            Analyze contributor behavior, identify top contributors, and understand 
+            team dynamics with detailed statistics and activity patterns.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3 class="feature-title">Security Analysis</h3>
+          <p class="feature-description">
+            Get security scores and vulnerability assessments for your repositories. 
+            Identify potential risks and improve code security.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3 class="feature-title">Commit History Visualization</h3>
+          <p class="feature-description">
+            Beautiful commit flow diagrams showing project evolution over time. 
+            Track progress and identify development patterns.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Real-time Processing</h3>
+          <p class="feature-description">
+            Fast analysis using PyDriller and efficient data processing. 
+            Get insights in seconds, not minutes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack Section -->
+  <section class="tech-section">
+    <div class="tech-container">
+      <h2 class="section-title">Technology Stack</h2>
+      <p class="section-subtitle">
+        Built with modern technologies for performance and scalability
+      </p>
+      
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-icon frontend">🎨</div>
+          <div class="tech-name">Frontend</div>
+          <div class="tech-description">HTML, CSS, JavaScript</div>
+        </div>
+        
+        <div class="tech-card">
+          <div class="tech-icon backend">⚙️</div>
+          <div class="tech-name">Backend</div>
+          <div class="tech-description">Python, FastAPI</div>
+        </div>
+        
+        <div class="tech-card">
+          <div class="tech-icon viz">📊</div>
+          <div class="tech-name">Visualization</div>
+          <div class="tech-description">Mermaid.js, Chart.js</div>
+        </div>
+        
+        <div class="tech-card">
+          <div class="tech-icon backend">🔧</div>
+          <div class="tech-name">Analysis</div>
+          <div class="tech-description">PyDriller, Git CLI</div>
+        </div>
+        
+        <div class="tech-card">
+          <div class="tech-icon deploy">☁️</div>
+          <div class="tech-name">Deployment</div>
+          <div class="tech-description">Docker, Render</div>
+        </div>
+        
+        <div class="tech-card">
+          <div class="tech-icon frontend">🔐</div>
+          <div class="tech-name">Authentication</div>
+          <div class="tech-description">OAuth, JWT</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-container">
+      <h2 class="section-title">Meet Our Team</h2>
+      <p class="section-subtitle">
+        Passionate developers creating the future of repository analysis
+      </p>
+      
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">👨‍💻</div>
+          <h3 class="team-name">Manish Mahesh Varma</h3>
+          <p class="team-role">Full-Stack Developer & Project Lead</p>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-avatar">👩‍💻</div>
+          <h3 class="team-name">Dhanashree Mukesh Bondre</h3>
+          <p class="team-role">Frontend Developer & UI/UX Designer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Analyze Your Repositories?</h2>
+    <p class="cta-description">
+      Start gaining deeper insights into your GitHub repositories today
+    </p>
+    <button class="btn btn-primary" id="ctaBtn">
+      🚀 Get Started Now
+    </button>
+  </section>
+
+  <!-- Login Overlay (hidden by default) -->
+  <div id="loginOverlay" class="overlay">
+    <div class="auth-card">
+      <!-- Close Button -->
+      <span class="close-btn" id="closeLogin">&times;</span>
+
+      <div class="auth-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in to your GitHub Repository Analyzer account</p>
+      </div>
+
+      <!-- Error display -->
+      <div id="error" class="error-message" style="display: none;"></div>
+
+      <!-- Success display -->
+      <div id="success" class="success-message" style="display: none;"></div>
+
+      <!-- Google Sign-In Button -->
+      <div class="google-auth-section">
+        <div id="g_id_onload"
+          data-client_id="614110627327-f24lge6sas1073dfpf8m1hh8aj2detip.apps.googleusercontent.com"
+          data-context="signin" data-ux_mode="popup" data-callback="handleGoogleSignIn"
+          data-auto_prompt="false"></div>
+
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_blue"
+          data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
+      </div>
+
+      <div class="divider"><span>or</span></div>
+
+      <!-- Manual Login Form -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+
+        <button type="submit" class="auth-btn" id="loginBtn">
+          <span class="btn-text">Sign In</span>
+          <div class="loading-spinner" style="display: none;"></div>
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="/register" class="auth-link">Sign up here</a></p>
+        <p><a href="/" class="auth-link">← Back to Analyzer</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="/static/js/background.js"></script>
+  <script type="module" src="/static/js/auth.js"></script>
+  <script>
+    // Background
+    window.addEventListener('load', () => {
+      import('/static/js/background.js').then(module => {
+        module.initBackground();
+      });
+    });
+
+    // Google Sign-In callback
+    window.handleGoogleSignIn = function (response) {
+      if (response.credential) {
+        import('/static/js/auth.js').then(module => {
+          module.handleGoogleLogin(response.credential);
+        }).catch(error => {
+          document.getElementById('error').textContent = 'Authentication module error';
+          document.getElementById('error').style.display = 'block';
         });
+      } else {
+        document.getElementById('error').textContent = 'Google authentication failed';
+        document.getElementById('error').style.display = 'block';
+      }
+    }
 
-        // Google Sign-In callback - FIXED VERSION
-        window.handleGoogleSignIn = function (response) {
-            console.log('Google Sign-In response received:', response);
+    // Popup Controls
+    const openLogin = document.getElementById("openLogin");
+    const loginOverlay = document.getElementById("loginOverlay");
+    const closeLogin = document.getElementById("closeLogin");
+    const getStartedBtn = document.getElementById("getStartedBtn");
+    const learnMoreBtn = document.getElementById("learnMoreBtn");
+    const ctaBtn = document.getElementById("ctaBtn");
 
-            if (response.credential) {
-                console.log('Google credential found, processing authentication...');
+    function showLoginModal() {
+      loginOverlay.classList.add("active");
+    }
 
-                import('/static/js/auth.js').then(module => {
-                    module.handleGoogleLogin(response.credential);
-                }).catch(error => {
-                    console.error('Error importing auth module:', error);
-                    document.getElementById('error').textContent = 'Authentication module error';
-                    document.getElementById('error').style.display = 'block';
-                });
-            } else {
-                console.error('No credential in Google response');
-                document.getElementById('error').textContent = 'Google authentication failed - no credential received';
-                document.getElementById('error').style.display = 'block';
-            }
+    openLogin.addEventListener("click", showLoginModal);
+    if (getStartedBtn) getStartedBtn.addEventListener("click", showLoginModal);
+    if (ctaBtn) ctaBtn.addEventListener("click", showLoginModal);
+
+    if (learnMoreBtn) {
+      learnMoreBtn.addEventListener("click", () => {
+        document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    closeLogin.addEventListener("click", () => {
+      loginOverlay.classList.remove("active");
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === loginOverlay) loginOverlay.classList.remove("active");
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
+      });
+    });
 
-        // Handle Google Sign-In errors
-        window.addEventListener('load', () => {
-            // Add error handling for Google Sign-In
-            if (typeof google !== 'undefined' && google.accounts) {
-                google.accounts.id.initialize({
-                    client_id: "614110627327-f24lge6sas1073dfpf8m1hh8aj2detip.apps.googleusercontent.com",
-                    callback: handleGoogleSignIn,
-                    error_callback: (error) => {
-                        console.error('Google Sign-In initialization error:', error);
-                        document.getElementById('error').textContent = 'Google Sign-In initialization failed';
-                        document.getElementById('error').style.display = 'block';
-                    }
-                });
-            }
-        });
-    </script>
+    // Add scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards and sections
+    document.querySelectorAll('.feature-card, .tech-card, .team-card').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.animationDelay = `${index * 0.1}s`;
+      observer.observe(el);
+    });
+  </script>
 </body>
-
 </html>
